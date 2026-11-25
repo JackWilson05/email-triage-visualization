@@ -1,0 +1,13 @@
+# Raw emails and full working tables stay local.
+data/raw/
+data/processed/
+
+# Python and editor artifacts.
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+.env
+
+# Generated final packaging.
+submission/*.zip

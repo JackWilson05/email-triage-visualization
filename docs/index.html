@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A visual comparison of text and email-context signals for spam triage." />
+    <title>Email Triage Needs More Than Text</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="vendor/d3.v5.min.js"></script>
+    <script>
+      if (!window.d3) {
+        document.write('<script src="https://cdn.jsdelivr.net/npm/d3@7"><\\/script>');
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+      <section class="hero content-width">
+        <p class="eyebrow">CSCE 567 FINAL PROJECT</p>
+        <h1>Email Triage Needs More Than Text</h1>
+        <p class="lede">Comparing message language and email context for safer spam-filtering decisions.</p>
+        <p class="intro">This case study compares text and email-context signals for spam triage. It tests whether either signal family improves the model and whether precision targets chosen on validation data hold up on a separate test set.</p>
+        <div class="summary-grid" id="summary-grid" aria-label="Project summary"></div>
+      </section>
+
+      <section class="story-section content-width" id="data">
+        <div class="section-heading">
+          <p class="eyebrow">01 · THE DATA</p>
+          <h2>Each email carries two kinds of evidence</h2>
+          <p>The cleaned dataset combines message language with structural information from email headers and MIME content. Source-folder labels were used only to verify the join and were excluded from modeling.</p>
+        </div>
+        <div class="chart-card">
+          <h3>Header and context fields available after parsing</h3>
+          <div class="chart" id="coverage-chart"></div>
+        </div>
+      </section>
+
+      <section class="story-section content-width" id="signals">
+        <div class="section-heading">
+          <p class="eyebrow">02 · SIGNALS</p>
+          <h2>Text patterns and email structure both vary by outcome</h2>
+          <p>These summaries are descriptive, not rules. No individual feature is enough to decide whether an email should be blocked.</p>
+        </div>
+        <div class="chart-card">
+          <h3>Selected feature distributions in the held-out test set</h3>
+          <div class="chart" id="distribution-chart"></div>
+        </div>
+      </section>
+
+      <section class="story-section content-width" id="risk-map">
+        <div class="section-heading">
+          <p class="eyebrow">03 · DISAGREEMENT</p>
+          <h2>Some emails look different depending on the signal family</h2>
+          <p>Each point is an anonymous held-out email. Hover to inspect its label, two scores, and safe structural summaries.</p>
+        </div>
+        <div class="chart-card">
+          <h3>Text-only and context-only XGBoost scores</h3>
+          <div class="chart" id="risk-chart"></div>
+        </div>
+      </section>
+
+      <section class="story-section content-width" id="models">
+        <div class="section-heading">
+          <p class="eyebrow">04 · SIX-MODEL ABLATION</p>
+          <h2>Text wins the selection, but the margin is tiny</h2>
+          <p>Naive Bayes with text-only features had the best validation average precision. Combined Naive Bayes was nearly tied and slightly higher on the held-out test set, which is not enough evidence to replace the validation-selected model. Both algorithms receive the same feature matrices for each signal condition.</p>
+        </div>
+        <div class="two-column">
+          <div class="chart-card">
+            <h3>Held-out average precision</h3>
+            <div class="chart" id="model-chart"></div>
+          </div>
+          <div class="chart-card">
+            <h3>Precision-recall curves</h3>
+            <div class="chart" id="pr-chart"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="story-section content-width" id="policy">
+        <div class="section-heading">
+          <p class="eyebrow">05 · ACTION</p>
+          <h2>The selected cutoffs do not fully hold on the test set</h2>
+          <p>The policy selects a 75% precision cutoff for review and a 95% cutoff for blocking on validation data, then evaluates those exact cutoffs once on the held-out test set. Blue is legitimate email and red is spam: ideally blue appears only in Deliver, red only in Quarantine, and the review band is empty.</p>
+        </div>
+        <div class="chart-card policy-card">
+          <div id="policy-summary"></div>
+          <div class="chart" id="policy-chart"></div>
+        </div>
+      </section>
+
+      <section class="appendix content-width">
+        <h2>Python analysis figures</h2>
+        <p>Python-generated figure exports are included here and in the final process document. The main story above uses D3 versions of the same analysis.</p>
+        <div class="figure-links" id="python-figures"></div>
+      </section>
+    </main>
+    <div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+    <script src="data/website_data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

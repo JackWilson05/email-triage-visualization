@@ -1,0 +1,86 @@
+:root {
+  --paper: #f8fafc;
+  --ink: #243447;
+  --muted: #5e6d7f;
+  --line: #d8e0e8;
+  --slate: #526779;
+  --blue: #3d6f9e;
+  --red: #c65a52;
+  --amber: #b8892d;
+  --card: #ffffff;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+.content-width { width: min(1120px, calc(100% - 2.5rem)); margin: 0 auto; }
+.hero { padding: 4.8rem 0 2.7rem; }
+.eyebrow { color: var(--slate); font-size: .76rem; font-weight: 800; letter-spacing: .12em; margin: 0 0 .55rem; }
+h1, h2, h3 { color: var(--ink); line-height: 1.14; }
+h1 { max-width: 780px; font-size: clamp(2.6rem, 7vw, 5rem); letter-spacing: -.045em; margin: 0; }
+h2 { font-size: clamp(1.75rem, 3.5vw, 2.6rem); margin: 0 0 .8rem; letter-spacing: -.025em; }
+h3 { font-size: 1rem; margin: 0 0 1.2rem; }
+.lede { color: var(--slate); font-size: clamp(1.12rem, 2vw, 1.4rem); font-weight: 650; margin: 1.1rem 0; }
+.intro, .section-heading > p:not(.eyebrow), .appendix > p { max-width: 720px; color: var(--muted); font-size: 1.05rem; }
+.summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; margin-top: 2rem; }
+.summary-card { background: var(--card); border: 1px solid var(--line); border-radius: .55rem; padding: 1rem; }
+.summary-card strong { display: block; color: var(--navy); font-size: 1.4rem; }
+.summary-card span { color: var(--muted); font-size: .83rem; }
+.story-section { padding: 3.75rem 0; border-top: 1px solid var(--line); }
+.section-heading { margin-bottom: 1.8rem; }
+.chart-card { background: var(--card); border: 1px solid var(--line); border-radius: .65rem; padding: 1.35rem; box-shadow: 0 8px 24px rgb(31 53 84 / 4%); overflow: hidden; }
+.chart-card > h3 { margin-bottom: .75rem; }
+.chart { min-height: 320px; width: 100%; }
+#distribution-chart { min-height: 455px; }
+#policy-chart { min-height: 300px; }
+svg { display: block; }
+.two-column { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.appendix { border-top: 1px solid var(--line); padding: 4rem 0 5rem; }
+.figure-links { display: flex; flex-wrap: wrap; gap: .65rem; }
+.figure-links a { border: 1px solid var(--line); background: white; border-radius: .4rem; color: var(--slate); font-size: .9rem; padding: .55rem .7rem; text-decoration: none; }
+.figure-links a:hover { background: #f0f4f7; }
+.tooltip { position: fixed; pointer-events: none; visibility: hidden; max-width: 270px; background: #17263b; border-radius: .4rem; color: white; font-size: .82rem; line-height: 1.4; padding: .75rem .85rem; box-shadow: 0 6px 20px rgb(0 0 0 / 18%); z-index: 10; }
+.tooltip.visible { visibility: visible; }
+.tooltip b { color: #ffffff; }
+.axis text { fill: var(--muted); font-size: .76rem; }
+.axis path, .axis line { stroke: var(--line); }
+.grid line { stroke: #e8edf2; }
+.legend { font-size: .8rem; fill: var(--muted); }
+.policy-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; margin-bottom: 1.2rem; }
+.policy-summary div { background: #f5f8fb; border-left: 3px solid var(--line); border-radius: .2rem; padding: .55rem .75rem; }
+.policy-summary span { color: var(--muted); font-size: .86rem; }
+.policy-summary div:nth-child(1) { border-color: var(--slate); }
+.policy-summary div:nth-child(2) { border-color: var(--amber); }
+.policy-summary div:nth-child(3) { border-color: var(--slate); }
+.policy-summary strong { display: block; color: var(--ink); }
+
+@media print {
+  @page { margin: .48in; }
+  body { background: #fff; font-size: 10.5pt; }
+  .content-width { width: 100%; }
+  .hero { padding: 0 0 1.25rem; }
+  .story-section { padding: 1.9rem 0; }
+  .section-heading { break-after: avoid; page-break-after: avoid; }
+  .chart-card, .summary-card, .appendix { break-inside: avoid; page-break-inside: avoid; box-shadow: none; }
+  .chart-card { padding: 1rem; }
+  #distribution-chart { min-height: 760px; }
+  #policy-chart { min-height: 325px; }
+  .chart { min-height: 275px; }
+  #distribution-chart { min-height: 390px; }
+  #policy-chart { min-height: 300px; }
+  .two-column { grid-template-columns: 1fr; }
+  .two-column .chart-card + .chart-card { margin-top: 1rem; }
+}
+
+@media (max-width: 760px) {
+  .hero { padding-top: 3.8rem; }
+  .summary-grid, .policy-summary, .two-column { grid-template-columns: 1fr; }
+  .story-section { padding: 3.2rem 0; }
+  .chart-card { padding: 1rem; }
+}
