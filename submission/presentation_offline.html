@@ -36750,7 +36750,7 @@ svg { display: block; }
       const display = name.replaceAll("_", " ");
       const style = curveStyle(name);
       g.append("path").datum(curve).attr("fill", "none").attr("stroke", style.color).attr("stroke-width", 2).attr("stroke-dasharray", style.dash).attr("d", line)
-        .on("mousemove", event => { [event] = eventAndDatum(event); tip(`<b>${display}</b><br>Precision-recall curve. Darker line indicates the combined feature set.`, event); }).on("mouseleave", hideTip);
+        .on("mousemove", event => { [event] = eventAndDatum(event); tip(`<b>${display}</b><br>Precision-recall curve. Color indicates algorithm; solid, dashed, and dotted lines indicate text, context, and combined inputs.`, event); }).on("mouseleave", hideTip);
     });
     g.append("text").attr("class", "legend").attr("x", 0).attr("y", c.innerHeight + 48).text("Dark slate: Naive Bayes   ·   Medium slate: XGBoost");
     g.append("text").attr("class", "legend").attr("x", 0).attr("y", c.innerHeight + 66).text("Solid: text   ·   Dashed: context   ·   Dotted: combined");
